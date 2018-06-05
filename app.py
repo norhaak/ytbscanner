@@ -19,10 +19,11 @@ def convert(ifile):
     output_dir = os.path.join(os.path.curdir, TREATED_DIR)
     backup_dir = os.path.join(os.path.curdir, BACKUP_DIR)
     ofile = os.path.join(output_dir, ifile[:-3] + "mp3")
-    conv_audio_cmd[2] = ifile
+    ifile_path = os.path.join(DOWNLOADED_DIR, ifile)
+    conv_audio_cmd[2] = ifile_path
     conv_audio_cmd[7] = ofile
     call(conv_audio_cmd)
-    move(ifile, backup_dir)
+    move(ifile_path, backup_dir)
 
 
 def convertAll():
@@ -48,6 +49,9 @@ def download(video_id, video_format):
 if __name__ == '__main__':
     video_id = input('youtube video_id: ')
     while video_id not in ('q', 'quit'):
-        download(video_id, 'audio')
+        if video_id == 'convert':
+            convertAll()
+        else:
+            download(video_id, 'audio')
         video_id = input('youtube video_id: ')
     print('Bye ;). See next time!')
