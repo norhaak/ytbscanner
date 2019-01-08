@@ -16,6 +16,12 @@ get_audio_cmd = ['youtube-dl', '-f', 'best', '']
 get_video_cmd = ['youtube-dl', '-f', 'best', '']
 
 
+def initConfig():
+    app_folders = [DOWNLOADED_DIR, TREATED_DIR, BACKUP_DIR]
+    for folder in app_folders:
+        if not os.path.isdir(folder):
+            os.mkdir(folder)
+
 def getVideoIdFromUrl(video_url):
     video_id = re.search("\?v=(\D*)", video_url).group(1)
     return video_id
@@ -66,6 +72,7 @@ def download(video_id, dl_format):
 
 
 if __name__ == '__main__':
+    initConfig()
     video_url = input('youtube video_id: ')
     while video_url not in ('q', 'quit'):
         if video_url == 'convert':
