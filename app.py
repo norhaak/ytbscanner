@@ -73,12 +73,21 @@ def download(video_id, dl_format):
 
 if __name__ == '__main__':
     initConfig()
-    video_url = input('youtube video_id: ')
-    while video_url not in ('q', 'quit'):
-        if video_url == 'convert':
+    print("\nWelcome to YTBScanner")
+    print("Commands list:")
+    print("""
+    download: download video or only audio.
+    convert: convert mp4 audio files to mp3.
+    quit: quit program.       
+    """)
+    cmd = input('cmd: ')
+    while cmd not in ('q', 'quit'):
+        print(cmd)
+        if (cmd == 'download'):
+            video_id = input('video id: ')
+            dl_format = input('download format [audio or video]: ')
+            download(video_id, dl_format)
+        if (cmd == 'convert'):
             convertAll()
-        else:
-            dl_format = input('download format? [audio]: ')
-            download(video_url, dl_format)
-        video_url = input('youtube video_id: ')
-    print('Bye ;). See you next time!')
+        cmd = input('cmd: ')
+    print('\nBye ;). See you next time!')
